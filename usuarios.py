@@ -7,7 +7,7 @@ db_connect = database.get_db_connection()
 def get():
     try:
         conn = db_connect.connect()
-        result = conn.execute(text('SELECT * FROM usuarios ORDER BY id DESC LIMIT 10'))
+        result = conn.execute(text('SELECT * FROM usuarios ORDER BY id'))
         data = [dict(zip(result.keys(), row)) for row in result]
         conn.close()
         return jsonify(data), 200
@@ -38,7 +38,7 @@ def post():
         )
         conn.commit()
 
-        result = conn.execute(text('SELECT * FROM usuarios ORDER BY id DESC LIMIT 1'))
+        result = conn.execute(text('SELECT * FROM usuarios ORDER BY id'))
         data = [dict(zip(result.keys(), row)) for row in result]
         conn.close()
         return jsonify(data), 201
