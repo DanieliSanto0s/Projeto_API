@@ -38,7 +38,7 @@ def post():
         )
         conn.commit()
 
-        result = conn.execute(text('SELECT * FROM usuarios ORDER BY id'))
+        result = conn.execute(text('SELECT * FROM usuarios ORDER BY id DESC LIMIT 1'))
         data = [dict(zip(result.keys(), row)) for row in result]
         conn.close()
         return jsonify(data), 201
